@@ -1,0 +1,313 @@
+import { PaymentDetailsFields } from '@/types/PaymentDetailsFields';
+
+export default {
+  1: [
+    {
+      field: 'paypal_username',
+      label: 'Paypal Email Address',
+      type: 'text',
+      rules: [
+        (v: string) => !!v || 'Paypal Username is required',
+        (v: string) => /.+@.+\..+/.test(v) || 'Paypal Username must be a valid E-mail',
+      ],
+    },
+  ],
+  2: [
+    {
+      title: 'Beneficiary Bank Information',
+      field: 'bank_name',
+      label: 'Bank Name',
+      type: 'text',
+      rules: [(v: string) => !!v || 'Bank Name is required'],
+    },
+    {
+      field: 'bank_address_line_1',
+      label: 'Bank Address (line 1)',
+      type: 'text',
+      rules: [(v: string) => !!v || 'Bank Address (line 1) is required'],
+    },
+    {
+      field: 'bank_address_line_2',
+      label: 'Bank Address (line 2)',
+      type: 'text',
+      rules: [],
+    },
+    {
+      field: 'bank_country',
+      label: 'Bank Country',
+      type: 'country',
+      rules: [(v: string) => !!v || 'Bank Country is required'],
+    },
+    {
+      field: 'bank_city',
+      label: 'Bank City',
+      type: 'text',
+      rules: [(v: string) => !!v || 'Bank City is required'],
+    },
+    {
+      field: 'bank_zip',
+      label: 'Bank Zip Code',
+      type: 'text',
+      rules: [],
+    },
+    {
+      field: 'bank_swift_code',
+      label: 'Bank Swift Code',
+      type: 'text',
+      rules: [
+        (v: string) => !!v || 'Bank Swift Code is required',
+        (v: string) => /^[A-Z]{6}[A-Z0-9]{2}([A-Z0-9]{3})?$/.test(v) || 'Bank Swift Code must be valid',
+      ],
+    },
+    {
+      field: 'bank_routing_number',
+      label: 'ABA/Routing number',
+      type: 'text',
+      rules: [],
+    },
+    {
+      field: 'bank_account_number',
+      label: 'Account number or IBAN',
+      type: 'text',
+      rules: [(v: string) => !!v || 'Account number or IBAN is required'],
+    },
+    {
+      field: 'bank_payment_details',
+      label: 'Payment Details',
+      type: 'text',
+      rules: [],
+    },
+    {
+      title: 'Beneficiary Information',
+      field: 'beneficiary_name',
+      label: 'Name',
+      type: 'text',
+      rules: [(v: string) => !!v || 'Name is required'],
+    },
+    {
+      field: 'beneficiary_address_1',
+      label: 'Address (line 1)',
+      type: 'text',
+      rules: [(v: string) => !!v || 'Address is required'],
+    },
+    {
+      field: 'beneficiary_address_2',
+      label: 'Address (line 2)',
+      type: 'text',
+      rules: [],
+    },
+    {
+      field: 'beneficiary_country',
+      label: 'Country',
+      type: 'country',
+      rules: [(v: string) => !!v || 'Country is required'],
+    },
+    {
+      field: 'beneficiary_region',
+      label: 'Region',
+      type: 'text',
+      rules: [],
+    },
+    {
+      field: 'beneficiary_city',
+      label: 'City',
+      type: 'text',
+      rules: [(v: string) => !!v || 'City is required'],
+    },
+    {
+      field: 'beneficiary_zip',
+      label: 'Zip Code',
+      type: 'text',
+      rules: [],
+    },
+    {
+      title: 'Intermediary/Corresponding Bank Information',
+      field: 'intermediary_bank_name',
+      label: 'Bank Name',
+      type: 'text',
+      rules: [(v: string) => !!v || 'Bank Name is required'],
+    },
+    {
+      field: 'intermediary_bank_address_1',
+      label: 'Bank Address (line 1)',
+      type: 'text',
+      rules: [(v: string) => !!v || 'Bank Address is required'],
+    },
+    {
+      field: 'intermediary_bank_address_2',
+      label: 'Bank Address (line 2)',
+      type: 'text',
+      rules: [],
+    },
+    {
+      field: 'intermediary_bank_country',
+      label: 'Country',
+      type: 'country',
+      rules: [(v: string) => !!v || 'Country is required'],
+    },
+    {
+      field: 'intermediary_bank_city',
+      label: 'City',
+      type: 'text',
+      rules: [(v: string) => !!v || 'City is required'],
+    },
+    {
+      field: 'intermediary_bank_zip',
+      label: 'Zip Сode',
+      type: 'text',
+      rules: [],
+    },
+    {
+      field: 'intermediary_bank_swift_code',
+      label: 'Swift Code',
+      type: 'text',
+      rules: [
+        (v: string) => !!v || 'Swift Code is required',
+        (v: string) => /^[A-Z]{6}[A-Z0-9]{2}([A-Z0-9]{3})?$/.test(v) || 'Swift Code must be valid',
+      ],
+    },
+    {
+      field: 'intermediary_bank_routing_number',
+      label: 'ABA/Routing number',
+      type: 'text',
+      rules: [],
+    },
+    {
+      field: 'intermediary_bank_routing_account_number',
+      label: 'Account number or IBAN',
+      type: 'text',
+      rules: [(v: string) => !!v || 'Account number or IBAN is required'],
+    },
+  ],
+  3: [
+    {
+      field: 'bitcoin_wallet',
+      label: 'Bitcoin Wallet',
+      type: 'text',
+      rules: [
+        (v: string) => !!v || 'Bitcoin Wallet is required',
+        (v: string) => /^(?:[13]{1}[a-km-zA-HJ-NP-Z1-9]{26,33}|bc1[a-z0-9]{39,59})$/.test(v) || 'Bitcoin Wallet must be valid',
+      ],
+    },
+  ],
+  4: [
+    {
+      title: 'Beneficiary Bank Information',
+      field: 'bank_name',
+      label: 'Bank Name',
+      type: 'text',
+      rules: [(v: string) => !!v || 'Bank Name is required'],
+    },
+    {
+      field: 'bank_address_line_1',
+      label: 'Bank Address (line 1)',
+      type: 'text',
+      rules: [(v: string) => !!v || 'Bank Address (line 1) is required'],
+    },
+    {
+      field: 'bank_address_line_2',
+      label: 'Bank Address (line 2)',
+      type: 'text',
+      rules: [],
+    },
+    {
+      field: 'bank_country',
+      label: 'Bank Country',
+      type: 'country',
+      rules: [(v: string) => !!v || 'Bank Country is required'],
+    },
+    {
+      field: 'bank_city',
+      label: 'Bank City',
+      type: 'text',
+      rules: [(v: string) => !!v || 'Bank City is required'],
+    },
+    {
+      field: 'bank_zip',
+      label: 'Bank Zip Code',
+      type: 'text',
+      rules: [],
+    },
+    {
+      field: 'bank_swift_code',
+      label: 'Bank Swift Code',
+      type: 'text',
+      rules: [
+        (v: string) => !!v || 'Bank Swift Code is required',
+        (v: string) => /^[A-Z]{6}[A-Z0-9]{2}([A-Z0-9]{3})?$/.test(v) || 'Bank Swift Code must be valid',
+      ],
+    },
+    {
+      field: 'bank_routing_number',
+      label: 'ABA/Routing number',
+      type: 'text',
+      rules: [],
+    },
+    {
+      field: 'bank_account_number',
+      label: 'Account number or IBAN',
+      type: 'text',
+      rules: [(v: string) => !!v || 'Account number or IBAN is required'],
+    },
+    {
+      field: 'bank_payment_details',
+      label: 'Payment Details',
+      type: 'text',
+      rules: [],
+    },
+    {
+      title: 'Beneficiary Information',
+      field: 'beneficiary_name',
+      label: 'Name',
+      type: 'text',
+      rules: [(v: string) => !!v || 'Name is required'],
+    },
+    {
+      field: 'beneficiary_address_1',
+      label: 'Address (line 1)',
+      type: 'text',
+      rules: [(v: string) => !!v || 'Address is required'],
+    },
+    {
+      field: 'beneficiary_address_2',
+      label: 'Address (line w)',
+      type: 'text',
+      rules: [],
+    },
+    {
+      field: 'beneficiary_country',
+      label: 'Country',
+      type: 'country',
+      rules: [(v: string) => !!v || 'Country is required'],
+    },
+    {
+      field: 'beneficiary_region',
+      label: 'Region',
+      type: 'text',
+      rules: [],
+    },
+    {
+      field: 'beneficiary_city',
+      label: 'City',
+      type: 'text',
+      rules: [(v: string) => !!v || 'City is required'],
+    },
+    {
+      field: 'beneficiary_zip',
+      label: 'Zip Code',
+      type: 'text',
+      rules: [],
+    },
+  ],
+  5: [
+    {
+      field: 'paxum_username',
+      label: 'Paxum Username',
+      type: 'text',
+      rules: [
+        (v: string) => !!v || 'Paxum Username is required',
+        (v: string) => /.+@.+\..+/.test(v) || 'Paxum Username must be a valid E-mail',
+      ],
+    },
+  ],
+} as PaymentDetailsFields;

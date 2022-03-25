@@ -1,0 +1,299 @@
+"""
+Direct the client to resolve this field locally, either from the cache or local resolvers.
+"""
+directive @client(
+  """
+  When true, the client will never use the cache for this value. See
+  https://www.apollographql.com/docs/react/essentials/local-state/#forcing-resolvers-with-clientalways-true
+  """
+  always: Boolean
+) on FIELD | FRAGMENT_DEFINITION | INLINE_FRAGMENT
+
+"""
+Export this locally resolved field as a variable to be used in the remainder of this query. See
+https://www.apollographql.com/docs/react/essentials/local-state/#using-client-fields-as-variables
+"""
+directive @export(
+  """The variable name to export this field as."""
+  as: String!
+) on FIELD
+
+"""
+Specify a custom store key for this result. See
+https://www.apollographql.com/docs/react/advanced/caching/#the-connection-directive
+"""
+directive @connection(
+  """Specify the store key."""
+  key: String!
+
+  """
+  An array of query argument names to include in the generated custom store key.
+  """
+  filter: [String!]
+) on FIELD
+
+type Query {
+  health: String!
+  currentUser: User
+  getOffer(id: ID!): Offer
+  listOffer(column: String, search: String, pagination: OfferPaginationInput!, filters: OfferFiltersInput): ListOfferResponse
+  breakdown(customPeriod: [String!], periodType: String!, limit: Int!, page: Int!, orderAsc: Boolean!, orderBy: String!, entity: String!): BreakdownResponse
+  reports(customPeriod: [String!], periodType: String!): ReportResponse
+  userExists(email: String!): Boolean!
+  getVerticals: [Vertical!]
+  getCurrencies: [Currency!]
+  getToken: String
+}
+
+type User {
+  id: ID!
+  name: String!
+  email: String!
+  message: String!
+}
+
+type Offer {
+  id: Int!
+  name: String!
+  status: String!
+  conversion_type: String!
+  sfl_vertical_id: Float!
+  descriptions: String!
+  currency_id: Float!
+  landing_page: Landing
+  offer_id_redirect: Float!
+  is_cpm_option_enabled: Boolean!
+  payin: Float!
+  payout_percent: [Float!]
+  restriction: String!
+  date_added: Float!
+  date_updated: String!
+  start_date: Float
+  end_date: Float
+  type: String!
+  step: Float!
+  use_start_end_date: Boolean!
+  advertiser_manager: String!
+  verticals: [Vertical!]!
+  currencies: [Currency!]!
+  geoRules: String
+  landings: [Landing!]
+  customLandings: [CustomLandingsOutput!]!
+  caps: OfferCap!
+  token: String!
+  customPayin: [OfferCustomPayin!]!
+}
+
+type Landing {
+  id: Int!
+  name: String!
+  url: String
+  params: String!
+  isDefault: Boolean!
+  status: String!
+  date_added: Float!
+  date_updated: String!
+}
+
+type Vertical {
+  id: Int!
+  name: String!
+}
+
+type Currency {
+  id: Int!
+  symbol: String!
+  abbr: String!
+}
+
+type CustomLandingsOutput {
+  id: Int
+  pos: Float!
+  country: String!
+  name: String!
+  url: String!
+}
+
+type OfferCap {
+  enabled: Float!
+  clicks_day: Float!
+  clicks_week: Float!
+  clicks_month: Float!
+  clicks_redirect_offer_id: Float!
+  clicks_redirect_offer_use_default: Boolean!
+  sales_day: Float!
+  sales_week: Float!
+  sales_month: Float!
+  sales_redirect_offer_id: Float!
+  sales_redirect_offer_use_default: Boolean!
+  start_date: Float
+  end_date: Float
+  use_start_end_date: Boolean!
+}
+
+type OfferCustomPayin {
+  id: Int!
+  geo: String!
+  payin: Float!
+}
+
+type ListOfferResponse {
+  data: [Offer!]!
+  count: Int
+}
+
+input OfferPaginationInput {
+  currentPage: Int
+  itemsPerPage: Int!
+  sortBy: String
+  sortDesc: Boolean
+}
+
+input OfferFiltersInput {
+  id: [Int!]
+  name: [String!]
+  conversion_type: [String!]
+  payin: [Int!]
+  status: [String!]
+}
+
+type BreakdownResponse {
+  data: [BreakdownItem!]!
+  count: Int!
+}
+
+type BreakdownItem {
+  clicks: Int!
+  conversions: Int!
+  revenue: Float!
+  offer: String
+  offer_id: Float
+  campaign: String
+  day: String
+  device: String
+  geo: String
+  hour: String
+  os: String
+}
+
+type ReportResponse {
+  dates: [String!]!
+  clicks: [Int!]!
+  conversions: [Int!]!
+}
+
+type Mutation {
+  register(data: RegisterInput!): User!
+  login(password: String!, email: String!): LoginResponse
+  confirmUser(token: String!): Boolean!
+  restorePassword(data: RestorePasswordInput!): Boolean!
+  forgotPassword(email: String!): Boolean!
+  refresh(refresh_token: String!): RefreshResponse
+  createOffer(step: Float, name: String!): Offer
+  updateOffer(data: UpdateOfferInput!): Offer
+  deleteOffer(id: Float!): Boolean
+}
+
+input RegisterInput {
+  email: String!
+  password: String!
+  repeatPassword: String!
+  profileData: ProfileData!
+  agreements: Agreements!
+}
+
+input ProfileData {
+  firstName: String!
+  lastName: String!
+  businessName: String!
+  topCountries: String
+  offeredProducts: String
+  otherNetworks: [String!]
+  websites: [WebsiteData!]
+}
+
+input WebsiteData {
+  site: String!
+  desc: String!
+}
+
+input Agreements {
+  safeData: Boolean!
+  safeGuidelines: Boolean!
+  safeNetwork: Boolean!
+  selfTrademark: Boolean!
+  readAgreements: Boolean!
+}
+
+type LoginResponse {
+  accessToken: String!
+  refreshToken: String!
+  user: User!
+}
+
+input RestorePasswordInput {
+  token: String!
+  password: String!
+  repeatPassword: String!
+}
+
+type RefreshResponse {
+  accessToken: String!
+  refreshToken: String!
+}
+
+input UpdateOfferInput {
+  id: Int!
+  name: String!
+  conversion_type: String!
+  sfl_vertical_id: Float!
+  offer_id_redirect: Float!
+  currency_id: Float!
+  descriptions: String!
+  payin: Float!
+  payout_percent: Float
+  is_cpm_option_enabled: Boolean!
+  geoRules: String!
+  step: Float
+  landings: [LandingsInput!]
+  customLandings: [CustomLandingsInput!]
+  caps: OfferCapInput
+  customPayin: [OfferCustomPayinInput!]
+  use_start_end_date: Boolean!
+  start_date: Float
+  end_date: Float
+}
+
+input LandingsInput {
+  id: Int
+  name: String!
+  url: String!
+  isDefault: Boolean
+}
+
+input CustomLandingsInput {
+  id: Int
+  pos: Float!
+  country: String!
+  name: String!
+  url: String!
+}
+
+input OfferCapInput {
+  enabled: Float!
+  clicks_day: Float!
+  clicks_week: Float!
+  clicks_month: Float!
+  sales_day: Float!
+  sales_week: Float!
+  sales_month: Float!
+  start_date: Float
+  end_date: Float
+  use_start_end_date: Boolean!
+}
+
+input OfferCustomPayinInput {
+  id: Int
+  geo: String!
+  payin: Float!
+}

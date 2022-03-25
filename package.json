@@ -1,0 +1,83 @@
+{
+  "name": "offersAdvUI",
+  "version": "0.1.95",
+  "private": true,
+  "scripts": {
+    "prod": "cross-env NODE_ENV=production node server.js",
+    "stage1": "cross-env NODE_ENV=stage1 node server.js",
+    "stage2": "cross-env NODE_ENV=stage2 node server.js",
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build",
+    "test:unit": "vue-cli-service test:unit",
+    "lint": "vue-cli-service lint",
+    "download-schema": "npx apollo client:download-schema --endpoint=http://localhost:4000/api/v1/graphql schema.graphql",
+    "generate-types": "npx apollo codegen:generate --localSchemaFile=schema.graphql --target=typescript",
+    "gsync": "npm run download-schema && npm run generate-types",
+    "postinstall": "rm -r node_modules/apollo-language-server/node_modules/graphql"
+  },
+  "dependencies": {
+    "@fingerprintjs/fingerprintjs": "^3.3.0",
+    "@vue/composition-api": "^1.0.3",
+    "apexcharts": "^3.27.3",
+    "apollo-cache-inmemory": "^1.6.6",
+    "apollo-client": "^2.6.10",
+    "apollo-link": "^1.2.14",
+    "apollo-link-context": "^1.0.20",
+    "axios": "^0.21.1",
+    "core-js": "^3.6.5",
+    "debounce": "^1.2.1",
+    "express": "^4.17.1",
+    "graphql": "^15.5.1",
+    "graphql-tag": "^2.12.5",
+    "iso-country-currency": "^0.5.3",
+    "jwt-decode": "^3.1.2",
+    "luxon": "^2.0.2",
+    "vue": "^2.6.11",
+    "vue-apexcharts": "^1.6.1",
+    "vue-apollo": "^3.0.0-beta.11",
+    "vue-class-component": "^7.2.3",
+    "vue-cli-plugin-apollo": "^0.22.2",
+    "vue-observe-visibility": "^1.0.0",
+    "vue-property-decorator": "^9.1.2",
+    "vue-router": "^3.2.0",
+    "vue-toastification": "^1.7.14",
+    "vuetify": "^2.4.0"
+  },
+  "devDependencies": {
+    "@types/jest": "^24.0.19",
+    "@types/luxon": "^2.0.0",
+    "@typescript-eslint/eslint-plugin": "^4.18.0",
+    "@typescript-eslint/parser": "^4.18.0",
+    "@vue/cli-plugin-babel": "~4.5.0",
+    "@vue/cli-plugin-eslint": "~4.5.0",
+    "@vue/cli-plugin-router": "~4.5.0",
+    "@vue/cli-plugin-typescript": "~4.5.0",
+    "@vue/cli-plugin-unit-jest": "~4.5.0",
+    "@vue/cli-service": "~4.5.0",
+    "@vue/eslint-config-airbnb": "^5.0.2",
+    "@vue/eslint-config-typescript": "^7.0.0",
+    "@vue/test-utils": "^1.0.3",
+    "apollo": "^2.33.4",
+    "cross-env": "^7.0.3",
+    "eslint": "^6.7.2",
+    "eslint-plugin-import": "^2.20.2",
+    "eslint-plugin-vue": "^6.2.2",
+    "lint-staged": "^9.5.0",
+    "node-sass": "^4.12.0",
+    "sass": "~1.32.0",
+    "sass-loader": "^10.0.0",
+    "typescript": "~4.1.5",
+    "vue-cli-plugin-vuetify": "~2.4.1",
+    "vue-template-compiler": "^2.6.11",
+    "vuetify-loader": "^1.7.0"
+  },
+  "gitHooks": {
+    "pre-commit": "lint-staged"
+  },
+  "lint-staged": {
+    "*.{js,jsx,vue,ts,tsx}": [
+      "vue-cli-service lint",
+      "git add"
+    ]
+  }
+}

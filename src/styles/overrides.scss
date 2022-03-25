@@ -1,0 +1,117 @@
+html {
+  overflow: auto;
+}
+
+.v-application a {
+  text-decoration: none;
+  &:hover {
+    color: var(--v-primary-lighten1);
+  }
+}
+
+.theme--light.v-application {
+  color: var(--v-accent-base);
+}
+
+.theme--light.v-text-field--solo > .v-input__control > .v-input__slot {
+  background: #f6f6f6;
+  border: 1px solid #BDBDCA;
+}
+
+.v-navigation-drawer {
+  .theme--light.v-list-item:not(.v-list-item--disabled) {
+    color: var(--v-accent-base);
+    .theme--light.v-icon {
+      color: inherit;
+    }
+    &:not(.v-list-item--active) {
+      color: var(--v-primary-base);
+      .theme--light.v-icon {
+        color: inherit;
+      }
+    }
+  }
+}
+
+.theme--light.v-sheet {
+  color: inherit;
+}
+
+.progress-line {
+  .v-progress-linear__buffer {
+    border: 1px solid #BDBDCA;
+    border-radius: 4px;
+  }
+  .v-progress-linear__determinate {
+    border-radius: 4px;
+  }
+}
+
+.my-field-group {
+  .v-text-field.v-text-field--solo, .v-text-field.v-text-field--outlined {
+    & .v-input__prepend-outer, & .v-input__append-outer {
+      margin-top: 0;
+      margin-bottom: 0;
+    }
+  }
+  & label {
+    display: block;
+    margin-bottom: 5px;
+  }
+}
+
+.v-text-field input, .theme--light.v-select .v-select__selections {
+  color: var(--v-primary-base);
+  font-weight: 600;
+}
+
+.theme--light.v-input input:not([disabled]), .theme--light.v-input textarea:not([disabled]) {
+  color: var(--v-primary-base);
+}
+
+.v-text-field--outlined > .v-input__control > .v-input__slot {
+  min-height: 48px;
+}
+
+.theme--light.v-text-field--outlined {
+  &.v-input--is-focused {
+    fieldset {
+      border: 1px solid #BDBDCA;
+    }
+  }
+  fieldset {
+    border: 1px solid #BDBDCA;
+  }
+}
+
+.v-input--checkbox .v-input__slot {
+  align-items: initial;
+  .theme--light.v-label {
+    color: var(--v-accent-base);
+  }
+  .v-input--selection-controls__input .v-icon {
+    color: var(--v-primary-base);
+  }
+}
+
+.theme--light.v-card > .v-card__text, .theme--light.v-card > .v-card__subtitle {
+  color: inherit;
+  font-weight: 700;
+  line-height: 20px;
+}
+
+.table-move-highlighting tbody tr:hover {
+  background: transparent !important;
+}
+.move-to-top {
+  position: relative;
+  top: -12px;
+}
+
+.time_period_wrap {
+  background: #3a3852;
+}
+
+.v-menu__content {
+  top: 240px !important;
+}
